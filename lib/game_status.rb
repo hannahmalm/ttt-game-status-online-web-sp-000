@@ -1,6 +1,7 @@
 require 'pry' 
 
 # Helper Method
+#if the board does not == nil or blank space, then it is taken (returns true). When using these types of methods you dont need an if statement 
 def position_taken?(board, index)
   !(board[index].nil? || board[index] == " ")
 end
@@ -19,7 +20,7 @@ WIN_COMBINATIONS = [
   
 def won?(board)
    WIN_COMBINATIONS.detect do |i|
-    #check if index [0,1,2] are all the same 
+    #check if index [0,1,2] are all the same - this isnt saying necessarying the array number 0,1,2; its saying if the first spot = X, and the second and third spot = X (or O), then it is a win. The spots can be any of the win combinations from above
    board[i[0]] == board[i[1]] &&
    board[i[1]] == board[i[2]] &&
    #see if there are values in this arrary
@@ -28,7 +29,7 @@ def won?(board)
 end 
 
 def full?(board)
-#check to see if board has all arrary spots filled in 
+#check to see if board has all arrary spots filled in, if they all are filled in, this will automatically be true, we want to ask if it is == to X or O 
   board.all?  do |i|
     #ask if i is equal to X or O 
   i == "X" || i == "O"  
@@ -46,8 +47,10 @@ def over?(board)
 end  
 
 def winner(board)
+  #make a new element including the won? method 
    won=won?(board)
    if won 
+     #if the board is won, return one of the spots in the array, which will be X or O. 
       board[won[0]]
     end  
 end  
